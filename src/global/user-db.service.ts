@@ -10,8 +10,6 @@ export class UserDBService {
   }
   private DB: IUser[];
 
-  private readonly userTemplate = {};
-
   getUsers() {
     return this.DB.map((user) => this.prepareUser(user));
   }
