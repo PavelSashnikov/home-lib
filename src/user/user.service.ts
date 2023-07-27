@@ -14,11 +14,11 @@ import { validate } from 'uuid';
 export class UserService {
   constructor(private readonly userDb: UserDBService) {}
 
-  async getUsers(): Promise<IUserSafety[]> {
+  getUsers() {
     return this.userDb.getUsers();
   }
 
-  async getUser(id: string): Promise<IUserSafety> {
+  getUser(id: string) {
     if (!validate(id)) {
       throw new BadRequestException('ID is not valid');
     }
@@ -29,14 +29,11 @@ export class UserService {
     return this.userDb.getUser(id);
   }
 
-  async addUser(user: CreateUserDto): Promise<IUserSafety> {
+  addUser(user: CreateUserDto) {
     return this.userDb.addUser(user);
   }
 
-  async updatePass(
-    id: string,
-    passes: UpdatePasswordDto,
-  ): Promise<IUserSafety> {
+  updatePass(id: string, passes: UpdatePasswordDto) {
     if (!validate(id)) {
       throw new BadRequestException('ID is not valid');
     }
@@ -50,7 +47,7 @@ export class UserService {
     return this.userDb.update(id, passes.newPassword);
   }
 
-  async delete(id: string): Promise<void> {
+  delete(id: string): void {
     if (!validate(id)) {
       throw new BadRequestException('ID is not valid');
     }
