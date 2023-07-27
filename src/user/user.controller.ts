@@ -1,12 +1,10 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -29,11 +27,6 @@ export class UserController {
   }
 
   @Get(':id')
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'user found',
-    type: UserDto,
-  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'user found',
@@ -100,7 +93,7 @@ export class UserController {
   @Delete(':id')
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
-    description: 'f the record is found and deleted',
+    description: 'if the record is found and deleted',
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,

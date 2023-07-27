@@ -4,13 +4,13 @@ import { CreateArtistDto } from 'src/artist/dto/create-artist.dto';
 import { IArtist } from 'src/entities/interfaces/artist.interface';
 
 @Injectable()
-export class UserDBService {
+export class ArtisDBService {
   constructor() {
     this.DB = [];
   }
   private DB: IArtist[];
 
-  getAll() {
+  getAll(): IArtist[] {
     return this.DB.map((art) => ({ ...art }));
   }
 
