@@ -1,10 +1,17 @@
-import { IsOptional } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, ValidateIf } from 'class-validator';
 
 export class CreateTrackDto {
+  @IsNotEmpty()
   readonly name: string;
-  @IsOptional()
-  readonly artistId: string;
-  @IsOptional()
-  readonly albumId: string;
+  @IsNotEmpty()
+  @ValidateIf((object, value) => value !== null)
+  @ApiProperty({ nullable: true, type: String })
+  readonly artistId: string | null;
+  @IsNotEmpty()
+  @ValidateIf((object, value) => value !== null)
+  @ApiProperty({ nullable: true, type: String })
+  readonly albumId: string | null;
+  @IsNotEmpty()
   readonly duration: number;
 }
