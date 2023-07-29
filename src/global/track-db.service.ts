@@ -47,4 +47,20 @@ export class TrackDbService {
     const i = this.DB.findIndex((tr) => tr.id === id);
     this.DB.splice(i, 1);
   }
+
+  clearAlbumField(albumId: string) {
+    this.DB.forEach((tr) => {
+      if (tr.albumId === albumId) {
+        tr.albumId = null;
+      }
+    });
+  }
+
+  clearArtistField(artistId: string) {
+    this.DB.forEach((tr) => {
+      if (tr.artistId === artistId) {
+        tr.artistId = null;
+      }
+    });
+  }
 }

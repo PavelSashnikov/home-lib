@@ -2,10 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { CreateAlbumDto } from 'src/album/dto/create-album.dto';
 import { IAlbum } from 'src/entities/interfaces/album.interface';
+import { FavoritesDbService } from './favorites-db.service';
+import { TrackDbService } from './track-db.service';
 
 @Injectable()
 export class AlbumDBService {
-  constructor() {
+  constructor(
+    private readonly favsDb: FavoritesDbService,
+    private readonly trackDb: TrackDbService,
+  ) {
     this.DB = [];
   }
   private DB: IAlbum[];
@@ -45,5 +50,15 @@ export class AlbumDBService {
   delete(id: string) {
     const i = this.DB.findIndex((al) => al.id === id);
     this.DB.splice(i, 1);
+    this.favsDb.deleteAlbum(id);
+    this.trackDb.clearAlbumField(id);
+  }
+
+  clearArtistField(artistId: string) {
+    this.DB.forEach((tr) => {
+      if (tr.artistId === artistId) {
+        tr.artistId = null;
+      }
+    });
   }
 }
