@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { IUser, IUserSafety } from 'src/entities/interfaces/user.interface';
+import { IUser } from 'src/entities/interfaces/user.interface';
 import { UserDBService } from 'src/global/user-db.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
