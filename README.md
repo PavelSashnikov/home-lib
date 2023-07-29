@@ -12,10 +12,7 @@ git clone {repository URL}
 ```
 
 ## Installing NPM modules
-
-```
-npm install
-```
+```yarn``` or ```npm install```
 
 ## Running application
 
