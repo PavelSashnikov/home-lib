@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AlbumController } from './album.controller';
 import { AlbumService } from './album.service';
-import { GlobalModule } from 'src/global/global.module';
+// import { GlobalModule } from 'src/global/global.module';
 
 @Module({
-  imports: [GlobalModule],
+  imports: [],
   controllers: [AlbumController],
   providers: [AlbumService],
 })

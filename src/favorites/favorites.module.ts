@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { FavoritesService } from './favorites.service';
 import { FavoritesController } from './favorites.controller';
-import { GlobalModule } from 'src/global/global.module';
+// import { GlobalModule } from 'src/global/global.module';
 
 @Module({
-  imports: [GlobalModule],
+  imports: [],
   providers: [FavoritesService],
   controllers: [FavoritesController],
 })

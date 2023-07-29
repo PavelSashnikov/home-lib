@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { CreateAlbumDto } from 'src/album/dto/create-album.dto';
 import { IAlbum } from 'src/entities/interfaces/album.interface';
@@ -8,7 +8,9 @@ import { TrackDbService } from './track-db.service';
 @Injectable()
 export class AlbumDBService {
   constructor(
+    @Inject(forwardRef(() => FavoritesDbService))
     private readonly favsDb: FavoritesDbService,
+    @Inject(forwardRef(() => TrackDbService))
     private readonly trackDb: TrackDbService,
   ) {
     this.DB = [];
