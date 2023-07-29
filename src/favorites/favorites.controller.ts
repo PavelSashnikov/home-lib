@@ -1,4 +1,65 @@
-import { Controller } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+} from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FavoritesService } from './favorites.service';
+import { FavoritesResponseDto } from './dto/favorites-respose.dto';
+import { ErrorDto } from 'src/global/error.dto';
 
-@Controller('favorites')
-export class FavoritesController {}
+@ApiTags('favorites')
+@Controller('favs')
+export class FavoritesController {
+  constructor(private readonly favServise: FavoritesService) {}
+
+  @Get()
+  getAll(): FavoritesResponseDto {
+    return this.favServise.getAll();
+  }
+
+  @Post('track/:id')
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'added successfully',
+    type: [String],
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'ID is invalid',
+    type: ErrorDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+    description: "trackId doesn't exist",
+    type: ErrorDto,
+  })
+  @HttpCode(HttpStatus.CREATED)
+  addTrack(@Param('id') id: string) {
+    return this.favServise.addTrack(id);
+  }
+
+  @Delete('track/:id')
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'if the record is found and deleted',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'ID is invalid',
+    type: ErrorDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'ID is not in favorites',
+    type: ErrorDto,
+  })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  deleteTrack(@Param('id') id: string) {
+    return this.favServise.deleteTrack(id);
+  }
+}

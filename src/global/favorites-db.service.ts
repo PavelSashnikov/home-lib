@@ -29,15 +29,27 @@ export class FavoritesDbService {
   }
 
   addTrack(id: string) {
-    this.DB.tracks.push(id);
+    if (!this.trackDb.getTrack(id)) {
+      return;
+    }
+    if (!this.DB.tracks.includes(id)) {
+      this.DB.tracks.push(id);
+    }
+    return this.DB.tracks;
   }
   deleteTrack(id: string) {
     const i = this.DB.tracks.findIndex((tr) => tr === id);
-    this.DB.tracks.splice(i, 1);
+    if (i >= 0) {
+      return this.DB.tracks.splice(i, 1);
+    }
   }
 
   addAlbum(id: string) {
+    if (this.DB.albums.includes(id)) {
+      return;
+    }
     this.DB.albums.push(id);
+    return this.DB.albums;
   }
   deleteAlbum(id: string) {
     const i = this.DB.albums.findIndex((tr) => tr === id);
@@ -45,7 +57,11 @@ export class FavoritesDbService {
   }
 
   addArtist(id: string) {
+    if (this.DB.artists.includes(id)) {
+      return;
+    }
     this.DB.artists.push(id);
+    return this.DB.artists;
   }
   deleteArtist(id: string) {
     const i = this.DB.artists.findIndex((tr) => tr === id);
