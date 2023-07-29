@@ -45,26 +45,34 @@ export class FavoritesDbService {
   }
 
   addAlbum(id: string) {
-    if (this.DB.albums.includes(id)) {
+    if (!this.albumDb.getAlbum(id)) {
       return;
     }
-    this.DB.albums.push(id);
+    if (!this.DB.albums.includes(id)) {
+      this.DB.albums.push(id);
+    }
     return this.DB.albums;
   }
   deleteAlbum(id: string) {
     const i = this.DB.albums.findIndex((tr) => tr === id);
-    this.DB.albums.splice(i, 1);
+    if (i >= 0) {
+      return this.DB.albums.splice(i, 1);
+    }
   }
 
   addArtist(id: string) {
-    if (this.DB.artists.includes(id)) {
+    if (!this.artistDb.getArtist(id)) {
       return;
     }
-    this.DB.artists.push(id);
+    if (!this.DB.artists.includes(id)) {
+      this.DB.artists.push(id);
+    }
     return this.DB.artists;
   }
   deleteArtist(id: string) {
     const i = this.DB.artists.findIndex((tr) => tr === id);
-    this.DB.artists.splice(i, 1);
+    if (i >= 0) {
+      return this.DB.artists.splice(i, 1);
+    }
   }
 }
