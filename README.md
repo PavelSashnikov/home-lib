@@ -10,9 +10,15 @@
 ```
 git clone {repository URL}
 ```
-
+then select currect branch
+```
+git checkout HomeLib-api
+```
 ## Installing NPM modules
-```yarn``` or ```npm install```
+### node v18 required!!!
+
+from project root folder
+```yarn``` or ```npm install``` `possible you should use --force flag for npm`
 
 ## Running application
 
