@@ -10,12 +10,15 @@
 ```
 git clone {repository URL}
 ```
-
+then select currect branch
+```
+git checkout HomeLib-api
+```
 ## Installing NPM modules
+### node v18 required!!!
 
-```
-npm install
-```
+from project root folder
+```yarn``` or ```npm install``` `possible you should use --force flag for npm`
 
 ## Running application
 
@@ -24,7 +27,8 @@ npm start
 ```
 
 After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
+in your browser OpenAPI documentation by typing http://localhost:4000/api/. There is information about available endpoints, request and response types,DTO desciption, etc.
+
 For more information about OpenAPI/Swagger please visit https://swagger.io/.
 
 ## Testing
